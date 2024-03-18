@@ -13,7 +13,10 @@
 
 ## Program main functional:
 /start - start work
+
 /usd - dollar rate
+
 /eur - euro rate
+
 /help - info
 
