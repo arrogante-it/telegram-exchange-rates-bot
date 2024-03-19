@@ -19,6 +19,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     private static final String USD_XPATH = "/exchange/currency[cc='USD']/rate";
     private static final String EUR_XPATH = "/exchange/currency[cc='EUR']/rate";
+    private static final String RUB_XPATH = "/exchange/currency[cc='RUB']/rate";
 
     private BankGovUaClient client;
 
@@ -37,6 +38,12 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
     public String getEURExchangeRates() throws ServiceException {
         String xml = client.getCurrencyRatesXML();
         return extractCurrencyValueFromXML(xml, EUR_XPATH);
+    }
+
+    @Override
+    public String getRUBExchangeRates() throws ServiceException {
+        String xml = client.getCurrencyRatesXML();
+        return extractCurrencyValueFromXML(xml, RUB_XPATH);
     }
 
 //    @Override

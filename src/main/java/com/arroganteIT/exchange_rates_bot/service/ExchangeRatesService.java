@@ -4,14 +4,14 @@ import com.arroganteIT.exchange_rates_bot.exception.ServiceException;
 
 public interface ExchangeRatesService {
 
-    String getUSDExchangeRates () throws ServiceException; // USA, Доллар
+    String getUSDExchangeRates() throws ServiceException; // USA, Доллар
 
     String getEURExchangeRates() throws ServiceException; // EURO, Евро
 
-//    String getGBPExchangeRates() throws ServiceException; // GBP, Фунт стерлингов
-//
-//    String getRUBExchangeRates() throws ServiceException; // Russia, Рубль
-//
+    String getRUBExchangeRates() throws ServiceException; // Russia, Рубль
+
+    //    String getGBPExchangeRates() throws ServiceException; // GBP, Фунт стерлингов
+
 //    String getINRExchangeRates() throws ServiceException; // India, Индийская рупия
 //
 //    String getILSExchangeRates() throws ServiceException; // Israel, Израильский шекель

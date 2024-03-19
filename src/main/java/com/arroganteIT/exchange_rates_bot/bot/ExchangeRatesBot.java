@@ -22,6 +22,7 @@ public class ExchangeRatesBot extends TelegramLongPollingBot {
     private static final String START = "/start";
     private static final String USD = "/usd";
     private static final String EUR = "/eur";
+    private static final String RUB = "/rub";
     private static final String HELP = "/help";
 
     @Autowired
@@ -51,6 +52,9 @@ public class ExchangeRatesBot extends TelegramLongPollingBot {
             case EUR:
                 eurCommand(chatId);
                 break;
+            case RUB:
+                rubCommand(chatId);
+                break;
             case HELP:
                 helpCommand(chatId);
                 break;
@@ -73,7 +77,8 @@ public class ExchangeRatesBot extends TelegramLongPollingBot {
 
                 "Для этого воспользуйтесь командами:\n" +
                 "/usd - курс доллара\n" +
-                "/eur - курс евро\n\n" +
+                "/eur - курс евро\n" +
+                "/rub - курс рубля\n\n" +
 
                 "Дополнительные команды:\n" +
                 "/help - получение справки";
@@ -112,12 +117,28 @@ public class ExchangeRatesBot extends TelegramLongPollingBot {
         sendMessage(chatId, format);
     }
 
+    private void rubCommand(Long chatId) {
+        String format;
+
+        try {
+            String rub = exchangeRatesService.getRUBExchangeRates();
+            String text = "Курс рубля на %s составляет %s гривен";
+            format = String.format(text, LocalDate.now(), rub);
+        } catch (ServiceException e) {
+            LOG.error("Ошибка получения курса рубля", e);
+            format = "Не удалось получить текущий курс рубля. Попробуйте позже.";
+        }
+
+        sendMessage(chatId, format);
+    }
+
     private void helpCommand(Long chatId) {
         String text = "\n" +
                 "Справочная информация по боту\n\n" +
                 "Для получения текущих курсов валют воспользуйтесь командами:\n" +
                 "/usd - курс доллара\n" +
-                "/eur - курс евро";
+                "/eur - курс евро\n" +
+                "/rub - курс рубля";
 
         sendMessage(chatId, text);
     }
